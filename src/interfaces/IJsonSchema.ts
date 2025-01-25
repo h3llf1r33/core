@@ -6,6 +6,7 @@ interface ISchemaBase {
     default?: any;
     examples?: any[];
     definitions?: { [key: string]: IJsonSchema };
+    const?: any;
     allOf?: IJsonSchema[];
     anyOf?: IJsonSchema[];
     oneOf?: IJsonSchema[];
@@ -86,6 +87,7 @@ export type IJSONSchemaType =
 export interface IJsonSchema extends ISchemaBase {
     type?: IJSONSchemaType["type"];
     enum?: any[];
+    const?: any;
     // Number/Integer
     minimum?: number;
     maximum?: number;
