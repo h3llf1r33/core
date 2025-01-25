@@ -54,8 +54,8 @@ interface IStringSchema extends ISchemaBase {
 interface IArraySchema extends ISchemaBase {
     type: "array";
     items?: IJsonSchema | IJsonSchema[];
-    minItems?: number;
-    maxItems?: number;
+    minItems?: number | { '$data': string };
+    maxItems?: number | { '$data': string };
     uniqueItems?: boolean;
     contains?: IJsonSchema;
     minContains?: number;
@@ -103,8 +103,8 @@ export interface IJsonSchema extends ISchemaBase {
 
     // Array
     items?: IJsonSchema | IJsonSchema[];
-    minItems?: number;
-    maxItems?: number;
+    minItems?: number | { '$data': string };
+    maxItems?: number | { '$data': string };
     uniqueItems?: boolean;
     contains?: IJsonSchema;
     minContains?: number;
@@ -120,5 +120,9 @@ export interface IJsonSchema extends ISchemaBase {
     patternProperties?: { [pattern: string]: IJsonSchema };
     dependencies?: { [key: string]: string[] | IJsonSchema };
     // Error Message specific to your current prop declaration
-    errorMessage?: Record<string, string> | string,
+    errorMessage?: {
+        properties?: {
+            [key: string]: string | { [validationType: string]: string }
+        }
+    } | string | Record<string, string>;
 }
